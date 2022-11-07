@@ -1,0 +1,333 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: monospace;
+}
+
+.speech{
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #87ceeb;
+  position: relative;
+  z-index: 1;
+
+}
+
+.fas{
+  font-weight: 600;
+  font-size: 3rem;
+  min-width: 4rem;
+}
+button{
+  padding: 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+
+/* JOGO */
+.cenario {
+  width: 100%;
+  height: 84.9vh;
+  border-bottom: 20px solid rgb(25, 175, 25);
+  margin: 0 auto;
+  position: relative; 
+  overflow: hidden;
+  background: linear-gradient(
+    #87ceeb,
+    #e6f6ff
+  ); 
+}
+
+.pipe {
+  position: absolute; 
+  bottom: 0;
+  width: 80px;
+  animation: pipe-animation 5s infinite linear; 
+}
+.pipe.desabilitar{
+  display: none;
+}
+.pipe.active{
+  display: flex;
+}
+
+
+.mario {
+  width: 150px;
+  position: absolute;
+  bottom: 0;
+}
+.jump{
+  animation: jump 500ms  ease-out;    
+
+}
+
+.clouds {
+  position: absolute;
+  width: 400px;
+  animation: clouds-animation 20s infinite linear;
+}
+
+.cogumelo {
+  position: absolute;
+  width: 100px;
+  animation: cogumelo-animation 8s infinite linear;
+  bottom: 75%;
+}
+
+@keyframes pipe-animation {
+  from {
+    right: 0; 
+  }
+  to {
+    right: 100%; 
+  }
+}
+
+
+
+@keyframes jump{
+  0%{
+      bottom: 0;
+  }
+  40%{
+      bottom: 180px;
+  }
+  60% {
+      bottom: 180px;
+  }
+
+  100%{
+      bottom: 0;
+  }
+}
+
+
+@keyframes clouds-animation {
+  from {
+    right: -400px;
+  }
+
+  to {
+    right: 100%;
+  }
+}
+
+@keyframes cogumelo-animation {
+  from {
+    right: 0;
+  }
+
+  to {
+    right: 100%;
+  }
+}
+
+.modal {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 100;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.desabilitar {
+  display: none;
+}
+
+.modal .modal-start {
+  width: 650px;
+  background-image: url("img/fundo-start.png");
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-shadow: 2px 2px 20px #ffc900;
+  padding: 50px;
+  border-radius: 30px;
+  display: none;
+}
+
+.modal .modal-start.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: fade-up 1s forwards;
+}
+
+.modal .modal-start .titulo {
+  font-size: 36px;
+  text-align: center;
+  margin: 20px 0px;
+  color: #00ae33;
+  -webkit-text-stroke: 3px black;
+}
+
+.modal .modal-start .regra {
+  text-align: center;
+  font-size: 14px;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.8);
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.modal .modal-start .input-jogador {
+  width: 300px;
+  height: 50px;
+  border: solid 3px #0097d3;
+  border-radius: 10px;
+  padding: 15px;
+  font-size: 18px;
+  outline: none;
+}
+
+.modal .modal-game-over {
+  width: 650px;
+  height: 500px;
+  background-image: linear-gradient(#0097d3, #e7e7e7);
+  box-shadow: 2px 2px 20px #0097d3;
+  padding: 50px;
+  border-radius: 30px;
+  display: none;
+}
+
+.modal .modal-game-over.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: fade-up 1s forwards;
+}
+
+.modal .modal-game-over .titulo {
+  font-size: 36px;
+  text-align: center;
+  margin: 20px 0px;
+  color: #ff201c;
+  -webkit-text-stroke: 3px black;
+}
+
+.modal .modal-game-over .img-game-over {
+  width: 300px;
+}
+
+.modal .modal-game-over .wrapper-btn {
+  display: flex;
+  gap: 30px;
+}
+
+.modal .modal-ranking {
+  width: 650px;
+  min-height: 500px;
+  max-height: 85%;
+  background-image: linear-gradient(#0097d3, #e2e2e2);
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-shadow: 2px 2px 20px #0097d3;
+  padding: 50px;
+  border-radius: 30px;
+  display: none;
+}
+
+.modal .modal-ranking.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: fade-up 1s forwards;
+}
+
+.modal .modal-ranking .titulo {
+  font-size: 36px;
+  text-align: center;
+  margin: 20px 0px;
+  color: #0da831;
+  -webkit-text-stroke: 3px black;
+}
+
+.modal .img-mario {
+  position: absolute;
+  right: -100px;
+  bottom: 0;
+  width: 150px;
+}
+
+.modal .img-mario.mario1, .modal .img-mario.mario3 {
+  left: -100px;
+}
+
+.modal .btn-modal {
+  background: none;
+  border: none;
+  width: 300px;
+  height: 70px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-content: flex-end;
+  background-color: #bd827c;
+  text-transform: uppercase;
+  padding: 15px;
+  margin: 30px 0px;
+  font-size: 34px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.modal .btn-red-tr:not(:disabled) {
+  cursor: pointer;
+  background-color: #ff201c;
+}
+
+.modal .btn-red-tr:not(:disabled)::before {
+  position: absolute;
+  content: "";
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+
+
+
+.modal .btn-red-tr:not(:disabled):hover::before {
+  border: 0px;
+}
+
+.modal .btn-reiniciar,
+.modal .btn-ranking {
+  width: 200px;
+  height: 50px;
+  font-size: 25px;
+}
+
+.azul {
+  color: #0097d3;
+}
+
+.amarelo {
+  color: #ffc900;
+}
+
+.vermelho {
+  color: #ff201c;
+}
+
+.verde {
+  color: #00ae33;
+}
+
+
