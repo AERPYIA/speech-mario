@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
   <head>
+    <link rel="website icon" 
+      type="dick/png" 
+      href="img/mario icon site.png" />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,6 +13,7 @@
     <script src="https://kit.fontawesome.com/cf6fa412bd.js" crossorigin="anonymous"></script>
     
     <title>Jogo Mário</title>
+
   </head> 
   <body>
 
@@ -24,25 +28,25 @@
     
     <section class="modal" id="modal">
       <div class="modal-start active" id="modalStart">
-          <h1 class="titulo"><span class="azul">ARE</span> <span class="amarelo">YOU</span> <span
-                  class="vermelho">READY?</span></h1>
+          <h1 class="titulo"><span class="azul">VOCÊ</span> <span class="amarelo">ESTÁ</span> <span
+                  class="vermelho">PRONTO?</span></h1>
 
           <input type="text" class="input-jogador" id="inputJogador" placeholder="Jogador..." onfocus="true">
           <button class="btn-modal btn-red-tr btn-start" id="btnStart" disabled>Iniciar Jogo!</button>
-          <p class="regra"><span class="vermelho">Instruções:</span><span class="azul">Fala </span><span class="vermelho">"pular" </span><span class="azul">que ele pula e </span><span class="vermelho">"iniciar" </span><span class="azul">para ele começar</span></p>
+          <p class="regra"><span class="vermelho">Instruções:</span> <span class="azul">Fala </span><span class="vermelho">"pular" </span><span class="azul">que ele pula e </span><span class="vermelho">"iniciar" </span><span class="azul">para ele começar</span></p>
 
           <div>
               <button id="btnGravarmodal" ><i class="fas fa-microphone"></i></button>
               <button id="btnPararmodal" disabled><i class="fas fa-microphone-slash"></i></button>
           </div>
-          <textarea id="textareamodal"></textarea>
+          <textarea id="textareamodal" disabled></textarea>
           
       </div>
 
       <div class="modal-game-over" id="modalGameOver">
           <h1 class="titulo"><span class="azul">HAHA!</span> <span class="amarelo">você</span> <span
-                  class="vermelho">foi</span> <span class="verde">zuado!</span></h1>
-          <img src="img/Mario-triste.jpg" class="img-game-over">
+                  class="vermelho">foi</span> <span class="verde">zoado!</span></h1>
+          <img src="img/mariogover.gif" class="img-game-over">
       <div class="wrapper-btn">
               <button class="btn-modal btn-red-tr btn-ranking" id="btnRanking">Ranking</button>
               <button class="btn-modal btn-red-tr btn-reiniciar" id="btnReiniciar">Reiniciar</button>

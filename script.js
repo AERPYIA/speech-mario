@@ -30,11 +30,10 @@ const jump = () => {
 
   setTimeout(() => {
     mario.classList.remove("jump");
-  }, 500);
+  }, 2500);
 };
 
-document.addEventListener("keydown", jump);
-document.addEventListener("click", jump);
+
 
 
 
@@ -164,7 +163,9 @@ class speechApi {
         reiniciar()
         btnGravarmodal.disabled = true
       }
-
+      if(transcript.match(/nome/)){
+        
+      }
     }
   }
 
@@ -202,6 +203,7 @@ class speechApi {
     btnGravar.disabled = true
     btnParar.disabled = false
     btnGravargover.disabled = true
+    btnParargover.disabled = false
   })
 
   btnPararmodal.addEventListener("click", () => {
@@ -210,6 +212,8 @@ class speechApi {
     speech.stop()
     btnParar.disabled= true
     btnGravar.disabled = false
+    btnGravargover.disabled = false
+    btnParargover.disabled = true
   })
 
   btnGravargover.addEventListener("click", e => {
@@ -227,11 +231,3 @@ class speechApi {
     btnParar.disabled= true
     btnGravar.disabled = false
   })
-
-
-
-
-
-
-
-
