@@ -1,5 +1,6 @@
 const mario = document.querySelector(".mario"); 
 const pipe = document.querySelector(".pipe"); 
+const moeda = document.querySelector("#moeda"); 
 
 
 const webkitSpeechRecognition = document.querySelector(".speechApi")
@@ -74,11 +75,10 @@ const nomevoz = () =>{
 const loopDoJogo = setInterval(() => {
   const pipePosition = pipe.offsetLeft; 
   const marioPosition = +window.getComputedStyle(mario).bottom.replace("px", ""); 
-  const marioleft = mario.offsetLeft
 
 
   pipe.classList.add('desabilitar')
-  console.log(pipePosition)
+  moeda.classList.add('desabilitar')
 
   if (pipePosition <= 120 && pipePosition > 0 && marioPosition < 80) {
 
@@ -93,16 +93,11 @@ const loopDoJogo = setInterval(() => {
     mario.style.marginLeft = "50px";
 
     clearInterval(loopDoJogo); 
+    moeda.classList.add('desabilitar')
     
-    console.log(pipePosition)
 
     modal.classList.remove('desabilitar'); // Habilita o modal e o fundo preto;
     modalGameOver.classList.add('active'); // Habilita a tela de game-over no modal;
-
-  }
-  if (pipePosition === marioleft){
-    points ++;
-    pontuacao.innerHTML = points
 
   }
 }, 10);
@@ -118,6 +113,7 @@ const comecar = () => {
 
   
   pipe.classList.add('active')
+  moeda.classList.add('active')
 
 
 

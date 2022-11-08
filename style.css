@@ -53,6 +53,23 @@ button{
   width: 80px;
   animation: pipe-animation 5s infinite linear; 
 }
+.pipe.desabilitar{
+  display: none;
+}
+.pipe.active{
+  display: flex;
+}
+.moeda{
+  position: absolute; 
+  animation: pipe-animation 5s infinite linear; 
+
+}
+.moeda.desabilitar{
+  display: none;
+}
+.moeda.active{
+  display: flex;
+}
 .pontuacao{
   font-size: 30px;
   color: #ff201c;
@@ -61,12 +78,6 @@ button{
   font-weight: bold;
 }
 
-.pipe.desabilitar{
-  display: none;
-}
-.pipe.active{
-  display: flex;
-}
 
 
 .mario {
