@@ -53,6 +53,14 @@ button{
   width: 80px;
   animation: pipe-animation 5s infinite linear; 
 }
+.pontuacao{
+  font-size: 30px;
+  color: #ff201c;
+  display: block;
+  margin-right: 0;
+  font-weight: bold;
+}
+
 .pipe.desabilitar{
   display: none;
 }
@@ -65,6 +73,7 @@ button{
   width: 150px;
   position: absolute;
   bottom: 0;
+  margin-left: 0;
 }
 .jump{
   animation: jump 2500ms  ease-out;    
@@ -150,15 +159,15 @@ button{
 }
 
 .modal .modal-start {
-  width: 700px;
-  height: 400px;
+  width: 80vh;
+  height: 60vh;
   background-image: url("img/fundo-start.png");
   background-position: top center;
   background-size: cover;
   background-repeat: no-repeat;
   box-shadow: 2px 2px 20px #ffc900;
   padding: 50px;
-  border-radius: 30px;
+  border-radius: 25px;
   display: none;
 }
 
@@ -171,12 +180,10 @@ button{
 }
 
 .modal .modal-start .titulo {
-  border-top: 10px;
   font-size: 30px;
   text-align: center;
   margin: 15px 0px;
   color: #00ae33;
-  -webkit-text-stroke: 3px black;
 }
 
 .modal .modal-start .regra {
@@ -205,7 +212,7 @@ button{
   background-image: linear-gradient(#0097d3, #e7e7e7);
   box-shadow: 2px 2px 20px #0097d3;
   padding: 50px;
-  border-radius: 30px;
+  border-radius: 25px;
   display: none;
 }
 
@@ -215,8 +222,8 @@ button{
   justify-content: center;
   align-items: center;
   animation: fade-up 1s forwards;
-  height: 65%;
-  width: 50%;
+  height: 60vh;
+  width: 70vh;
 }
 
 .modal .modal-game-over .titulo {
@@ -224,7 +231,7 @@ button{
   text-align: center;
   margin: 20px 0px;
   color: #ff201c;
-  -webkit-text-stroke: 3px black;
+
 }
 
 .modal .modal-game-over .img-game-over {
@@ -298,21 +305,6 @@ button{
 .modal .btn-red-tr:not(:disabled) {
   cursor: pointer;
   background-color: #ff201c;
-}
-
-.modal .btn-red-tr:not(:disabled)::before {
-  position: absolute;
-  content: "";
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-}
-
-
-
-.modal .btn-red-tr:not(:disabled):hover::before {
-  border: 0px;
 }
 
 .modal .btn-reiniciar,

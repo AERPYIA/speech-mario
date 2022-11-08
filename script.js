@@ -22,8 +22,9 @@ const modalGameOver = document.querySelector('#modalGameOver');
 const btnReiniciar = document.querySelectorAll('#btnReiniciar');
 const btnRanking = document.querySelector('#btnRanking');
 const cenario = document.querySelector('#cenario');
+const pontuacao = document.querySelector('#pontuacao');
 
-
+let points = 0
 
 const jump = () => {
   mario.classList.add("jump");
@@ -32,12 +33,6 @@ const jump = () => {
     mario.classList.remove("jump");
   }, 2500);
 };
-
-
-
-
-
-
 
 const validaJogador = ({ target }) => {
 
@@ -66,19 +61,24 @@ const validaJogador = ({ target }) => {
 }; // Chamada da função;
 inputJogador.addEventListener('input', validaJogador);
 
-// Função que limpa a caixa de texto;
 const limpaTexto = () => {
     inputJogador.value = '';
 };
 
+const nomevoz = () =>{
+  textarea.value = textarea.value.replace(/nome/, '')
 
-
+  inputJogador.value = textarea.value.replace(' ', '')
+}
 
 const loopDoJogo = setInterval(() => {
   const pipePosition = pipe.offsetLeft; 
   const marioPosition = +window.getComputedStyle(mario).bottom.replace("px", ""); 
+  const marioleft = mario.offsetLeft
+
 
   pipe.classList.add('desabilitar')
+  console.log(pipePosition)
 
   if (pipePosition <= 120 && pipePosition > 0 && marioPosition < 80) {
 
@@ -94,9 +94,15 @@ const loopDoJogo = setInterval(() => {
 
     clearInterval(loopDoJogo); 
     
+    console.log(pipePosition)
 
     modal.classList.remove('desabilitar'); // Habilita o modal e o fundo preto;
     modalGameOver.classList.add('active'); // Habilita a tela de game-over no modal;
+
+  }
+  if (pipePosition === marioleft){
+    points ++;
+    pontuacao.innerHTML = points
 
   }
 }, 10);
@@ -124,6 +130,9 @@ const reiniciar = () => {
 btnReiniciar.forEach((btn) => {
   btn.addEventListener('click', reiniciar);
 });
+
+document.addEventListener('keydown', jump);    
+
 
 
 
@@ -164,7 +173,8 @@ class speechApi {
         btnGravarmodal.disabled = true
       }
       if(transcript.match(/nome/)){
-        
+        nomevoz()
+        stop()
       }
     }
   }
@@ -230,4 +240,4 @@ class speechApi {
     speech.stop()
     btnParar.disabled= true
     btnGravar.disabled = false
-  })
+  });
