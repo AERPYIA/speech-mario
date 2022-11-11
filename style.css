@@ -6,35 +6,54 @@
 }
 
 .speech{
-
+  width: 60%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #87ceeb;
   position: relative;
-  z-index: 0; 
+  z-index: 10; 
+  margin-left: auto;
+  margin-right: auto;
 }
-
+.voz button{
+  padding: 5px;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  margin: 1px;
+  margin-bottom: 10px;
+}
+.speech .voz button{
+  margin-top: 5px;
+}
+.speech .jspeech{
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+.textarea{
+  min-width: 200px;
+  max-width: 500px;
+  min-height: 40px;
+  max-height: 40px;
+}
+.speech .textarea{
+  min-height: 30px;
+}
 .fas{
   font-weight: 600;
   font-size: 3rem;
   min-width: 4rem;
   height: 10px;
-  
 }
-button{
-  padding: 5px;
-  border: none;
-  cursor: pointer;
-  border-radius: 50%;
+.pontuacao{
+  margin-top: 0;
 }
-
 
 /* JOGO */
 .cenario {
   width: 100%;
-  height: 78.6vh;
+  height: 100vh;
   border-bottom: 37px solid rgb(25, 175, 25);
   margin: 0 auto;
   position: relative; 
@@ -57,10 +76,14 @@ button{
 .pipe.active{
   display: flex;
 }
-.moeda{
-  position: absolute; 
-  animation: pipe-animation 5s infinite linear; 
 
+.moeda{
+  position: absolute;
+  bottom: 102px;
+  width: 80px;
+  animation: pipe-animation 5s infinite linear; 
+  display: none;
+  opacity: 0;
 }
 .moeda.desabilitar{
   display: none;
@@ -68,15 +91,6 @@ button{
 .moeda.active{
   display: flex;
 }
-.pontuacao{
-  font-size: 30px;
-  color: #ff201c;
-  display: block;
-  margin-right: 0;
-  font-weight: bold;
-}
-
-
 
 .mario {
   width: 150px;
@@ -93,6 +107,7 @@ button{
   position: absolute;
   width: 400px;
   animation: clouds-animation 20s infinite linear;
+  z-index: 1;
 }
 
 .cogumelo {
@@ -100,6 +115,7 @@ button{
   width: 100px;
   animation: cogumelo-animation 8s infinite linear;
   bottom: 75%;
+  z-index: 1;
 }
 
 @keyframes pipe-animation {
@@ -168,6 +184,8 @@ button{
 }
 
 .modal .modal-start {
+  max-width: 750px;
+  max-height: 580px;
   width: 45%;
   height: 75%;
   background-image: url("img/fundo-start.png");
@@ -193,6 +211,7 @@ button{
   text-align: center;
   margin-bottom: 10px;
   color: #00ae33;
+  -webkit-text-stroke: 2px black;
 }
 
 .modal .modal-start .regra {
@@ -206,6 +225,7 @@ button{
 }
 
 .modal .modal-start .input-jogador {
+  max-width: 420px;
   width: 80%;
   height: 50px;
   border: solid 3px #0097d3;
@@ -216,6 +236,8 @@ button{
 }
 
 .modal .modal-game-over {
+  max-width: 780px;
+  max-height: 650px;
   width: 45%;
   height: 75%;
   background-image: linear-gradient(#0097d3, #e7e7e7);
@@ -240,16 +262,18 @@ button{
   text-align: center;
   margin: 20px 0px;
   color: #ff201c;
+  -webkit-text-stroke: 2px black;
 
 }
 
 .modal .modal-game-over .img-game-over {
   width: 50%;
+  max-width: 450px;
 }
 
 .modal .modal-game-over .wrapper-btn {
   display: flex;
-  gap: 10px;
+  gap: 30px;
 }
 
 .modal .modal-ranking {
@@ -293,20 +317,20 @@ button{
 
 .modal .btn-modal {
   background: none;
-  border: none;
   width: 300px;
   height: 70px;
   position: relative;
-  display: flex;
   justify-content: center;
   align-content: flex-end;
   background-color: #bd827c;
   text-transform: uppercase;
   padding: 15px;
-  margin: 30px 0px;
+  margin: 15px 0px;
   font-size: 34px;
   font-weight: 600;
   color: #fff;
+  border-radius: 3px;
+  
 }
 
 .modal .btn-red-tr:not(:disabled) {
@@ -316,10 +340,10 @@ button{
 
 .modal .btn-reiniciar,
 .modal .btn-ranking {
-  width: 100%;
-  height: 50%;
+  width: 250px;
+  height: 60px;
   font-size: 30px;
-  white-space: normal !important;
+  border-radius: 3px;
 }
 
 .azul {
