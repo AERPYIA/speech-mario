@@ -24,10 +24,15 @@ const btnRanking = document.querySelector('#btnRanking');
 const cenario = document.querySelector('#cenario');
 const pontuacao = document.querySelector('#pontuacao');
 const tempo = document.querySelector('#tempo');
+const tabelaHTML = document.querySelector('#tabelaRanking');
 
 let nomeJogador = ''
 let cronometro
 let points = 0
+let dados = 0
+
+
+
 
 const jump = () => {
   mario.classList.add("jump");
@@ -78,6 +83,8 @@ const loopDoJogo = setInterval(() => {
   const moedaPosition = +window.getComputedStyle(moeda).bottom.replace("px", ""); 
   pipe.classList.add('desabilitar')
   moeda.classList.add('desabilitar')
+
+
 
   if (pipePosition <= 120 && pipePosition > 0 && marioPosition > 80 && moedaPosition <=103){
     moeda.style.bottom = "572px"
@@ -250,6 +257,19 @@ btnParargover.addEventListener("click", () => {
 
 //banco de dados
 
+
+
+const bancoTemp = (nome, pontuacao, tempo) => {
+
+  let banco = getBanco();
+
+  let dados = {nomeJogador: nome,points: pontuacao,cronometro: tempo};
+
+  //acrescentando conteudo dentro dele sem apagar o que tem dentro dele
+  banco.unshift(dados)
+
+  setBanco(JSON.stringify(banco))
+};
 //colocar itens dentro do banco
 const setBanco = (banco) => {
   localStorage.setItem('bd-mario', banco);
@@ -260,25 +280,11 @@ const getBanco = () => {
   return JSON.parse(localStorage.getItem('bd-mario')) ?? [] ; //se não encontrar retorne uma lista vazia)
 };
 
-const bancoTemp = (nome, pontuacao, tempo) => {
-
-  let banco = getBanco();
-
-  let dados = {
-    nomeJogador: nome,
-    points: pontuacao,
-    cronometro: tempo
-  };
-
-  //acrescentando conteudo dentro dele sem apagar o que tem dentro dele
-  banco.unshift(dados)
-
-  setBanco(JSON.stringify(banco))
-};
 
 const criarTabela = (posicao, nome, points, cronometro) => {
   const itemHTML = document.createElement('tr');
   itemHTML.classList.add(dados);
+
 
   itemHTML.innerHTML = `
       <td>${posicao}</td>
@@ -286,7 +292,7 @@ const criarTabela = (posicao, nome, points, cronometro) => {
       <td>${points}</td>
       <td>${cronometro}</td>
   `
-  tabelaHTML.appendChild(itemHTML);
+  tabelaHTML.innerHTML(itemHTML);
 };
 
 const tabelaRanking = () => {
@@ -300,7 +306,7 @@ const tabelaRanking = () => {
       let tempo = item.cronometro;
 
 
-      criarTabela(posicao, nome, points, tempo);
+      criarTabela(posicao,nome, points, tempo);
 
   });
 };

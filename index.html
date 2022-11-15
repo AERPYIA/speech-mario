@@ -17,7 +17,7 @@
 
 <body>
   <section class="modal" id="modal">
-    <section class="modal-start active" id="modalStart">
+    <section class="modal-start active " id="modalStart">
       <h1 class="titulo"><span class="azul">VOCÊ</span> <span class="amarelo">ESTÁ</span> <span
           class="vermelho">PRONTO?</span></h1>
 
@@ -54,7 +54,7 @@
     <section class="modal-ranking" id="modalRanking">
       <h1 class="titulo">Ranking</h1>
       <div class="main-tabela">
-        <table class="tabela" border="2">
+        <table class="tabela" border="2" id="tabela-ranking">
           <tr class="linha">
             <td class="coluna">Posição</td>
             <td class="coluna">Jogador</td>
@@ -75,16 +75,17 @@
   </section>
   
   <div class="cenario" id='cenario'>
-
-      <div class="speech">
-        <p id="jspeech" class="jspeech">Jspeech</p>
-        <textarea id="textarea" class="textarea" disabled></textarea>
-      <div class="voz">
-        <button id="btnGravar"><i class="fas fa-microphone"></i></button>
-        <button id="btnParar" disabled><i class="fas fa-microphone-slash"></i></button>
+      <div class="topo">
+        <div class="pontuacao" id="pontuacao">pontos: <span id="pontuacao" class="pontuacao-2">0</span></div>
+        <div class="tempo">timer: <span id="tempo" class="tempo-2">0</span></div>
+        <div class="speech">
+          <p id="jspeech" class="jspeech">Jspeech</p>
+          <textarea id="textarea" class="textarea" disabled></textarea>
+        <div class="voz">
+          <button id="btnGravar"><i class="fas fa-microphone"></i></button>
+          <button id="btnParar" disabled><i class="fas fa-microphone-slash"></i></button>
+        </div>
       </div>
-      <div>timer: <span id="tempo">0</span></div>
-      <div class="pontuacao" id="pontuacao">pontos: <span id="pontuacao">0</span></div>
     </div>
 
     <img src="./img/mario.gif" class="mario" />
