@@ -97,6 +97,7 @@
   position: absolute;
   bottom: 0;
   margin-left: 0;
+  z-index: 2;
 }
 .jump{
   animation: jump 2500ms  ease-out;    
@@ -274,12 +275,12 @@
 .modal .modal-game-over .wrapper-btn {
   display: flex;
   gap: 30px;
+  white-space: normal;
 }
 
 .modal .modal-ranking {
-  width: 650px;
-  min-height: 500px;
-  max-height: 85%;
+  width: 60%;
+  height: 98%;
   background-image: linear-gradient(#0097d3, #e2e2e2);
   background-position: top center;
   background-size: cover;
@@ -303,22 +304,51 @@
   text-align: center;
   margin: 20px 0px;
   color: #0da831;
-  -webkit-text-stroke: 3px black;
-}
-
-.modal .img-mario {
   position: absolute;
-  right: -100px;
-  bottom: 0;
-  width: 150px;
+  margin-top: -38%;
+  -webkit-text-stroke: 2px black;
+
+  
+}
+.modal .modal-ranking.active .main-tabela{
+  width: 60%;
+  min-height: 20%;
+  max-height: 60%;
+  overflow-y: scroll;
+  position: static;
+  text-align: center;
+  justify-content: center;
+  margin-bottom: 5%;
+  margin-top: 15%;
+  
+}
+.main-tabela .tabela{
+  width: 100%;
+  overflow-x: scroll;
+  text-align: center;
+
+}
+.modal .img-mario-bandeira {
+  position: absolute;
+  bottom:0%;
+  max-width:20%;
+  width: auto;
+  margin-right: 41.5%;
+}
+.modal .img-mario-trofeu{
+  position: absolute;
+  bottom: 1%;
+  max-width:15%;
+  width: auto;
+  margin-left: 43%;
 }
 
 
 
 .modal .btn-modal {
   background: none;
-  width: 300px;
-  height: 70px;
+  width: 60%;
+  height: 20%;
   position: relative;
   justify-content: center;
   align-content: flex-end;
@@ -340,10 +370,14 @@
 
 .modal .btn-reiniciar,
 .modal .btn-ranking {
-  width: 250px;
+  width: 40VH;
   height: 60px;
   font-size: 30px;
   border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
 }
 
 .azul {

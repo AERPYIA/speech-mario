@@ -18,12 +18,16 @@ const btnStart = document.querySelector("#btnStart")
 const modal = document.querySelector('#modal');
 const modalStart = document.querySelector('#modalStart');
 const modalGameOver = document.querySelector('#modalGameOver');
+const modalRanking = document.querySelector('#modalRanking');
 const btnReiniciar = document.querySelectorAll('#btnReiniciar');
 const btnRanking = document.querySelector('#btnRanking');
 const cenario = document.querySelector('#cenario');
 const pontuacao = document.querySelector('#pontuacao');
 const tempo = document.querySelector('#tempo');
 
+let nomeJogador = ''
+let cronometro
+let points = 0
 
 const jump = () => {
   mario.classList.add("jump");
@@ -41,15 +45,6 @@ const validaJogador = ({ target }) => {
 
         // Acesso pelo click do mouse. Chama a função que inicia o jogo.
         btnStart.addEventListener('click', comecar);
-
-        // Acesso pelo enter do teclado
-        window.addEventListener('keypress', ({ key }) => {
-            if (key === 'Enter') {
-                // Chama a função que inicia o jogo.
-                comecar();
-            }
-        })
-
         // Pega o nome do jogador
         nomeJogador = target.value.trim().toUpperCase();
 
@@ -65,20 +60,24 @@ const limpaTexto = () => {
 };
 
 const nomevoz = () =>{
-  textarea.value = textarea.value.replace(/nome/, '')
+  textareamodal.value = textareamodal.value.replace(/nome/, '')
 
-  inputJogador.value = textarea.value.replace(' ', '')
+  inputJogador.value = textareamodal.value.trim()
+
+  nomeJogador = inputJogador.value
 }
-var cronometro
-let points = 0
+const cleantextaera = (
+  setInterval(() => {
+    document.getElementById('textareamodal').value = ' '
+  }, 1000)
+)
+
 const loopDoJogo = setInterval(() => {
   const pipePosition = pipe.offsetLeft; 
   const marioPosition = +window.getComputedStyle(mario).bottom.replace("px", ""); 
   const moedaPosition = +window.getComputedStyle(moeda).bottom.replace("px", ""); 
   pipe.classList.add('desabilitar')
   moeda.classList.add('desabilitar')
-  console.log(moedaPosition)
-
 
   if (pipePosition <= 120 && pipePosition > 0 && marioPosition > 80 && moedaPosition <=103){
     moeda.style.bottom = "572px"
@@ -106,6 +105,8 @@ const loopDoJogo = setInterval(() => {
 
     clearInterval(loopDoJogo); 
     clearInterval(cronometro)
+
+    bancoTemp(nomeJogador, points, cronometro)
 
     modal.classList.remove('desabilitar'); 
     modalGameOver.classList.add('active'); 
@@ -135,6 +136,14 @@ btnReiniciar.forEach((btn) => {
   btn.addEventListener('click', reiniciar);
 });
 
+const ranking = () => {
+  modalGameOver.classList.remove('active'); 
+  modalRanking.classList.add('active');
+  
+  tabelaRanking(); 
+};
+btnRanking.addEventListener('click', ranking);
+
 
 // VVVVVVVVVVVVVVVVVVVVVVVVVVVVVOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
 
@@ -147,6 +156,7 @@ class speechApi {
     this.output = textarea.output 
     this.speechApi.continuous = true
     this.speechApi.lang = "pt-BR"
+
     
     this.speechApi.onresult = (e) => {
       var resultIndex = e.resultIndex
@@ -158,8 +168,13 @@ class speechApi {
       }
       textareamodal.value += transcript
       if(transcript.match(/iniciar/)){
-        comecar()
-        textarea.disabled = false
+        if (nomeJogador == '' || nomeJogador == ' '){
+          alert('é necessario um nome')
+        }        
+        else{
+          comecar()       
+          textarea.disabled = false
+        }
       }
       if(transcript.match(/reiniciar/)){
         reiniciar()
@@ -169,6 +184,10 @@ class speechApi {
         nomevoz()
         stop()
         btnStart.removeAttribute('disabled')
+      }
+      if (transcript.match(/ranking/)){
+        modalStart.classList.remove('active');
+        ranking()
       }
     }
   }
@@ -228,3 +247,69 @@ btnParargover.addEventListener("click", () => {
     btnParar.disabled= true
     btnGravar.disabled = false
 });
+
+//banco de dados
+
+//colocar itens dentro do banco
+const setBanco = (banco) => {
+  localStorage.setItem('bd-mario', banco);
+};
+
+const getBanco = () => {
+  //retorna oq vem de dentro do bd local convertendo a string em seu formato original
+  return JSON.parse(localStorage.getItem('bd-mario')) ?? [] ; //se não encontrar retorne uma lista vazia)
+};
+
+const bancoTemp = (nome, pontuacao, tempo) => {
+
+  let banco = getBanco();
+
+  let dados = {
+    nomeJogador: nome,
+    points: pontuacao,
+    cronometro: tempo
+  };
+
+  //acrescentando conteudo dentro dele sem apagar o que tem dentro dele
+  banco.unshift(dados)
+
+  setBanco(JSON.stringify(banco))
+};
+
+const criarTabela = (posicao, nome, points, cronometro) => {
+  const itemHTML = document.createElement('tr');
+  itemHTML.classList.add(dados);
+
+  itemHTML.innerHTML = `
+      <td>${posicao}</td>
+      <td>${nome}</td>
+      <td>${points}</td>
+      <td>${cronometro}</td>
+  `
+  tabelaHTML.appendChild(itemHTML);
+};
+
+const tabelaRanking = () => {
+  // Variavel que recebe o banco depois de ser reorganizado na ordem crescente;
+  const sorted = getBanco().sort(colocacao).reverse();
+
+  sorted.forEach((item, index) => {
+      let posicao = index + 1;
+      let nome = item.nomeJogador;
+      let points = item.points;
+      let tempo = item.cronometro;
+
+
+      criarTabela(posicao, nome, points, tempo);
+
+  });
+};
+
+// Função que organiza a colocação dos jogadores
+const colocacao = (a, b) => {
+  return a.points < b.points
+      ? -1
+      : a.points > b.points
+          ? 1
+          : 0;
+};
