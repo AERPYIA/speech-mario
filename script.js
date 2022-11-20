@@ -24,18 +24,19 @@ const btnRanking = document.querySelector('#btnRanking');
 const cenario = document.querySelector('#cenario');
 const pontuacao = document.querySelector('#pontuacao');
 const tempo = document.querySelector('#tempo');
-const tabelaHTML = document.querySelector('#tabelaRanking');
+const tabelaHTML = document.querySelector('#main-tabela');
 
-let nomeJogador = ''
-let cronometro
-let points = 0
-let dados = 0
+let nomeJogador;
+let cronometro = 0;
+let points = 0;
+
 
 
 
 
 const jump = () => {
   mario.classList.add("jump");
+  playSom('somPulo')
 
   setTimeout(() => {
     mario.classList.remove("jump");
@@ -69,7 +70,7 @@ const nomevoz = () =>{
 
   inputJogador.value = textareamodal.value.trim()
 
-  nomeJogador = inputJogador.value
+  nomeJogador = inputJogador.value.trim().toUpperCase();
 }
 const cleantextaera = (
   setInterval(() => {
@@ -84,6 +85,7 @@ const loopDoJogo = setInterval(() => {
   pipe.classList.add('desabilitar')
   moeda.classList.add('desabilitar')
 
+ 
 
 
   if (pipePosition <= 120 && pipePosition > 0 && marioPosition > 80 && moedaPosition <=103){
@@ -96,6 +98,8 @@ const loopDoJogo = setInterval(() => {
     }, 1000);
   }
   if (pipePosition <= 120 && pipePosition > 0 && marioPosition < 80) {
+    stopSom('somCenario')
+    playSom('somGameover')
 
     pipe.style.animation = "none";
     pipe.style.left = `${pipePosition}px`;
@@ -129,6 +133,7 @@ const comecar = () => {
   textarea.value = ""
 
   var value = parseFloat(tempo.innerHTML)
+  playSom('somCenario');
 
   cronometro = setInterval(() => {
     value ++
@@ -263,12 +268,12 @@ const bancoTemp = (nome, pontuacao, tempo) => {
 
   let banco = getBanco();
 
-  let dados = {nomeJogador: nome,points: pontuacao,cronometro: tempo};
+  dados = {nomeJogador: nome, points: pontuacao, cronometro: tempo};
 
   //acrescentando conteudo dentro dele sem apagar o que tem dentro dele
   banco.unshift(dados)
 
-  setBanco(JSON.stringify(banco))
+  setBanco(JSON.stringify(banco));
 };
 //colocar itens dentro do banco
 const setBanco = (banco) => {
@@ -277,23 +282,24 @@ const setBanco = (banco) => {
 
 const getBanco = () => {
   //retorna oq vem de dentro do bd local convertendo a string em seu formato original
-  return JSON.parse(localStorage.getItem('bd-mario')) ?? [] ; //se não encontrar retorne uma lista vazia)
+  return JSON.parse(localStorage.getItem('bd-mario')) ?? []; //se não encontrar retorne uma lista vazia)
 };
 
 
-const criarTabela = (posicao, nome, points, cronometro) => {
+// Função que monta a tabela
+const criarTabela = (posicao, nome, pontuacao, tempo) => {
   const itemHTML = document.createElement('tr');
-  itemHTML.classList.add(dados);
-
+  itemHTML.classList.add('dados');
 
   itemHTML.innerHTML = `
       <td>${posicao}</td>
       <td>${nome}</td>
-      <td>${points}</td>
-      <td>${cronometro}</td>
+      <td class="pontuacao-tabela">${pontuacao}</td>
+      <td>${tempo}</td>
   `
-  tabelaHTML.innerHTML(itemHTML);
+  tabelaHTML.appendChild(itemHTML);
 };
+
 
 const tabelaRanking = () => {
   // Variavel que recebe o banco depois de ser reorganizado na ordem crescente;
@@ -302,14 +308,14 @@ const tabelaRanking = () => {
   sorted.forEach((item, index) => {
       let posicao = index + 1;
       let nome = item.nomeJogador;
-      let points = item.points;
+      let pontuacao = item.points;
       let tempo = item.cronometro;
 
 
-      criarTabela(posicao,nome, points, tempo);
+      criarTabela(posicao, nome, pontuacao, tempo);
 
   });
-};
+}
 
 // Função que organiza a colocação dos jogadores
 const colocacao = (a, b) => {
@@ -318,4 +324,19 @@ const colocacao = (a, b) => {
       : a.points > b.points
           ? 1
           : 0;
-};
+}
+
+
+
+//musica
+const playSom = (elemento) => {
+  const element = document.querySelector(`#${elemento}`)
+
+  element.play()
+}
+
+const stopSom = (elemento) => {
+  const element = document.querySelector(`#${elemento}`);
+
+  element.pause();
+}

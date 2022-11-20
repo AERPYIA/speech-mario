@@ -53,13 +53,13 @@
 
     <section class="modal-ranking" id="modalRanking">
       <h1 class="titulo">Ranking</h1>
-      <div class="main-tabela">
-        <table class="tabela" border="2" id="tabela-ranking">
-          <tr class="linha">
-            <td class="coluna">Posição</td>
-            <td class="coluna">Jogador</td>
-            <td class="coluna">Pontuação</td>
-            <td class="coluna">tempo</td>
+      <div class="main-tabela" id="main-tabela">
+        <table class="tabela" border="1" id="tabela-ranking">
+          <tr class="cabecalho">
+            <td>Posição</td>
+            <td>Jogador</td>
+            <td>Pontuação</td>
+            <td>tempo</td>
           </tr>
           
 
@@ -76,7 +76,7 @@
   
   <div class="cenario" id='cenario'>
       <div class="topo">
-        <div class="pontuacao" id="pontuacao">pontos: <span id="pontuacao" class="pontuacao-2">0</span></div>
+        <div class="pontuacao">pontos: <span id="pontuacao" class="pontuacao-2">0</span></div>
         <div class="tempo">timer: <span id="tempo" class="tempo-2">0</span></div>
         <div class="speech">
           <p id="jspeech" class="jspeech">Jspeech</p>
@@ -94,6 +94,10 @@
     <img src="./img/clouds.png" class="clouds" />
     <img src="./img/cogumelo.gif" class="cogumelo" />
   </div>
+
+  <audio src="audios/smb_gameover.wav" id="somGameover"></audio>
+  <audio src="audios/smb_jump-super.wav" id="somPulo"></audio>
+  <audio src="audios/y2meta.com - ELA PASSOU OLHOU GOSTOU SORRIU x BEAT MARIO - MC ALEF  TIK TOK (320 kbps).mp3" id="somCenario"></audio>
 
 </body>
 </html>
