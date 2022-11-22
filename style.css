@@ -4,36 +4,40 @@
   box-sizing: border-box;
   font-family: monospace;
 }
+@font-face {
+  font-family: 'mario';
+  src: url("font/SuperMario256.ttf");
+}
 
 .topo{
   width: 100%;
 }
 .topo .pontuacao{
   margin-top: 5px;
-  margin-left: 0;
+  margin-left: 3%;
   position: absolute;
   font-size: 24px;
-  font-style: bold;
+  font-style: mario;
   color: #0446fc;
 }
 .topo .pontuacao-2{
   margin-top: 25px;
-  margin-left: -30px;
+  margin-left: -57%;
   position: absolute;
 }
 
 .topo .tempo{
-  margin-top: 5px;
-  margin-left: 93%;
+  margin-top: 8px;
+  margin-left: 90%;
   position: absolute;
   font-size: 24px;
-  font-style: bold;
   color: #0446fc;
 }
 .topo .tempo-2{
   margin-top: 25px;
-  margin-left: -30px;
+  margin-left: -58%;
   position: absolute;
+  
 }
 
 .topo .speech{
