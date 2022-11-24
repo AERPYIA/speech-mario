@@ -26,11 +26,9 @@ const pontuacao = document.querySelector('#pontuacao');
 const tempo = document.querySelector('#tempo');
 const tabelaHTML = document.querySelector('#main-tabela');
 
-let nomeJogador;
+let nomeJogador = 'bobalhão';
 let cronometro = 0;
 let points = 0;
-
-
 
 
 
@@ -85,7 +83,7 @@ const loopDoJogo = setInterval(() => {
   pipe.classList.add('desabilitar')
   moeda.classList.add('desabilitar')
 
- 
+
 
 
   if (pipePosition <= 120 && pipePosition > 0 && marioPosition > 80 && moedaPosition <=103){
@@ -100,6 +98,7 @@ const loopDoJogo = setInterval(() => {
   if (pipePosition <= 120 && pipePosition > 0 && marioPosition < 80) {
     stopSom('somCenario')
     playSom('somGameover')
+    playSom('marioStart')
 
     pipe.style.animation = "none";
     pipe.style.left = `${pipePosition}px`;
@@ -115,12 +114,13 @@ const loopDoJogo = setInterval(() => {
     moeda.classList.remove('active')
 
     clearInterval(loopDoJogo); 
-    clearInterval(cronometro)
+    clearInterval(timer)
 
     bancoTemp(nomeJogador, points, cronometro)
 
     modal.classList.remove('desabilitar'); 
     modalGameOver.classList.add('active'); 
+
   }
 });
 
@@ -132,13 +132,13 @@ const comecar = () => {
   limpaTexto();
   textarea.value = ""
 
-  var value = parseFloat(tempo.innerHTML)
+  stopSom('marioStart')
   playSom('somCenario');
 
-  cronometro = setInterval(() => {
-    value ++
+  timer = setInterval(() => {
+    cronometro++
     
-    tempo.innerHTML = value
+    tempo.innerHTML = cronometro
   }, 1000);
 };
 const reiniciar = () => {
@@ -180,13 +180,9 @@ class speechApi {
       }
       textareamodal.value += transcript
       if(transcript.match(/iniciar/)){
-        if (nomeJogador == '' || nomeJogador == ' '){
-          alert('é necessario um nome')
-        }        
-        else{
-          comecar()       
-          textarea.disabled = false
-        }
+        comecar()       
+        textarea.disabled = false
+        playSom('somLetgo')
       }
       if(transcript.match(/reiniciar/)){
         reiniciar()
@@ -292,10 +288,10 @@ const criarTabela = (posicao, nome, pontuacao, tempo) => {
   itemHTML.classList.add('dados');
 
   itemHTML.innerHTML = `
-      <td>${posicao}</td>
-      <td>${nome}</td>
-      <td class="pontuacao-tabela">${pontuacao}</td>
-      <td>${tempo}</td>
+      <td class = "posicao-tabela">${posicao}</td>
+      <td class = "nome-tabela">${nome}</td>
+      <td class = "pontuacao-tabela">${pontuacao}</td>
+      <td class = "tempo-tabela">${tempo}</td>
   `
   tabelaHTML.appendChild(itemHTML);
 };
@@ -340,3 +336,4 @@ const stopSom = (elemento) => {
 
   element.pause();
 }
+playSom('marioStart')
