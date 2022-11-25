@@ -1,4 +1,8 @@
-![image](https://user-images.githubusercontent.com/92689246/203882618-397f7090-8572-4f0a-a1f1-5d7bea5a13a0.png)
+<div>
+    <a href="https://aerpyia.github.io/speech-mario/">
+    <img src="https://user-images.githubusercontent.com/92689246/203882618-397f7090-8572-4f0a-a1f1-5d7bea5a13a0.png">
+</div>
+
 ### O Speech Mario foi desenvolvido para o projeto de formação profissional do 3° ano do Ensino Médio Integrado com Técnico do Senac, que tinha como temas geradores a tecnologia e a inclusão. Tendo esses temas em vista, ele foi criado como um protótipo de um software de reconhecimento de voz que auxiliaria pessoas com deficiências motoras a jogarem games através de comandos de voz. Devido ao pouco tempo, conhecimento e experiência, não foi possível o desenvolvimento do software, com isso, o Speech Mario foi um protótipo de como seria esse software.
 
 ## Melhor funcionamento em:
