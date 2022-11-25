@@ -83,6 +83,9 @@ const loopDoJogo = setInterval(() => {
   pipe.classList.add('desabilitar')
   moeda.classList.add('desabilitar')
 
+  dificuldade()
+
+
 
 
 
@@ -116,6 +119,7 @@ const loopDoJogo = setInterval(() => {
     clearInterval(loopDoJogo); 
     clearInterval(timer)
 
+
     bancoTemp(nomeJogador, points, cronometro)
 
     modal.classList.remove('desabilitar'); 
@@ -124,6 +128,19 @@ const loopDoJogo = setInterval(() => {
   }
 });
 
+const dificuldade = () =>{
+  if (cronometro <= 15) {
+    pipe.style.animation = `pipe-animation 5s infinite linear`;
+  } 
+  else if (cronometro <= 30 && pipe.offsetLeft <= 0) {
+    pipe.style.rigth = '-90px';
+    pipe.style.animation = `pipe-animation 4s infinite linear`;
+  } 
+  else if (cronometro > 31 && pipe.offsetLeft <= 0) {
+    pipe.style.rigth = '-90px';
+    pipe.style.animation = `pipe-animation 3.5s infinite linear`;
+  }
+}
 const comecar = () => {
   modal.classList.add('desabilitar');
   modalStart.classList.remove('active');
@@ -163,7 +180,7 @@ class speechApi {
 
   constructor() {
 
-    const SpeechToText = window.SpeechRecognition || window.webkitSpeechRecognition
+    const SpeechToText = window.SpeechRecognition || window.webkitSpeechRecognition 
     this.speechApi = new SpeechToText()
     this.output = textarea.output 
     this.speechApi.continuous = true
@@ -196,6 +213,10 @@ class speechApi {
       if (transcript.match(/ranking/)){
         modalStart.classList.remove('active');
         ranking()
+      }
+      if (transcript.match(/sem som/)){
+        stopSom('marioStart')
+        stopSom('somCenario')
       }
     }
   }
@@ -256,9 +277,8 @@ btnParargover.addEventListener("click", () => {
     btnGravar.disabled = false
 });
 
+
 //banco de dados
-
-
 
 const bancoTemp = (nome, pontuacao, tempo) => {
 
@@ -282,7 +302,7 @@ const getBanco = () => {
 };
 
 
-// Função que monta a tabela
+
 const criarTabela = (posicao, nome, pontuacao, tempo) => {
   const itemHTML = document.createElement('tr');
   itemHTML.classList.add('dados');
@@ -313,7 +333,7 @@ const tabelaRanking = () => {
   });
 }
 
-// Função que organiza a colocação dos jogadores
+
 const colocacao = (a, b) => {
   return a.points < b.points
       ? -1
